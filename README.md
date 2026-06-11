@@ -50,8 +50,8 @@ claude-code --context ./claude-memory/memory.jsonl
 | F0.2 | Org hardening (2FA + member privileges) | ✅ done |
 | F1 | Skeleton + Cargo.toml + contracts | ✅ done ([v0.1.0](https://github.com/LOUST-PRO/loust-llm-mempipe/releases/tag/v0.1.0)) |
 | F2 | ChatGPT adapter MVP | ✅ done ([v0.2.0](https://github.com/LOUST-PRO/loust-llm-mempipe/releases/tag/v0.2.0)) |
-| F3 | Pipeline core (scrubber + dedup + signals + writer) | ⏸️ next |
-| F4 | CLI ergonomics | ⏸️ |
+| F3 | Pipeline core (scrubber + dedup + signals + writer) | ✅ done ([v0.3.0](https://github.com/LOUST-PRO/loust-llm-mempipe/releases/tag/v0.3.0)) |
+| F4 | CLI ergonomics | ⏸️ next |
 | F5 | Validation (CI + smoke E2E) | ⏸️ |
 | F7 | Public release announcement | ⏸️ (user opted out for now) |
 

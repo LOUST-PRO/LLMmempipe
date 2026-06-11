@@ -10,7 +10,7 @@ pub mod pipeline;
 
 pub use adapter::{Adapter, AdapterKind};
 pub use config::{OutputFormat, PipelineConfig, SecretKind};
-pub use pipeline::{NormalizedMessage, Role};
+pub use pipeline::{NormalizedMessage, Pipeline, PipelineOutput, PipelineStats, Role};
 
 #[cfg(test)]
 mod tests {

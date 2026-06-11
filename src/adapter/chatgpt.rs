@@ -143,6 +143,8 @@ fn build_normalized(msg: &ChatGptMessage, conv: &ChatGptConversation) -> Option<
         thread_title: Some(conv.title.clone()),
         project_hint,
         content_hash,
+        hits: 1,           // F3: dedup counter starts at 1 (unique)
+        signal_score: 0.0, // F3: computed downstream by `signals::score`
     })
 }
 
