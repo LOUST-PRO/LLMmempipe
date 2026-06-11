@@ -47,14 +47,13 @@ claude-code --context ./claude-memory/memory.jsonl
 | Phase | Scope | Status |
 |---|---|---|
 | F0.1 | Pre-publish audit (gh search) | ✅ done |
-| F0.2 | Org hardening (2FA + member privileges) | ⚠️ partial — 2FA via UI |
-| F1 | Skeleton + Cargo.toml + contracts | ✅ done (this commit) |
-| F2 | ChatGPT adapter (MVP) | ⏸️ next |
-| F3 | Pipeline core (scrubber + dedup + signals + writer) | ⏸️ |
+| F0.2 | Org hardening (2FA + member privileges) | ✅ done |
+| F1 | Skeleton + Cargo.toml + contracts | ✅ done ([v0.1.0](https://github.com/LOUST-PRO/loust-llm-mempipe/releases/tag/v0.1.0)) |
+| F2 | ChatGPT adapter MVP | ✅ done ([v0.2.0](https://github.com/LOUST-PRO/loust-llm-mempipe/releases/tag/v0.2.0)) |
+| F3 | Pipeline core (scrubber + dedup + signals + writer) | ⏸️ next |
 | F4 | CLI ergonomics | ⏸️ |
-| F5 | Validation (clippy + tests + smoke) | ⏸️ |
-| F6 | Staging manifest | ⏸️ |
-| F7 | Reddit comment (post-push) | ⏸️ |
+| F5 | Validation (CI + smoke E2E) | ⏸️ |
+| F7 | Public release announcement | ⏸️ (user opted out for now) |
 
 ## Build (current skeleton)
 

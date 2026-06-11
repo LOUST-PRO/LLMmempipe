@@ -1,0 +1,92 @@
+[
+  {
+    "id": "conv-001",
+    "title": "Rust FNV-1a hashing",
+    "create_time": 1700000000.0,
+    "current_node": "node-3",
+    "mapping": {
+      "node-root": { "message": null, "parent": null },
+      "node-1": {
+        "message": {
+          "id": "msg-1",
+          "author": { "role": "user" },
+          "content": { "parts": ["How do I implement FNV-1a in Rust?"] },
+          "create_time": 1700000001.0
+        },
+        "parent": "node-root"
+      },
+      "node-2": {
+        "message": {
+          "id": "msg-2",
+          "author": { "role": "assistant" },
+          "content": { "parts": ["Use the seahash crate: `use seahash::SeaHasher;` and write the bytes."] },
+          "create_time": 1700000002.0
+        },
+        "parent": "node-1"
+      },
+      "node-3": {
+        "message": {
+          "id": "msg-3",
+          "author": { "role": "user" },
+          "content": { "parts": ["Perfect, that works!"] },
+          "create_time": 1700000003.0
+        },
+        "parent": "node-2"
+      }
+    }
+  },
+  {
+    "id": "conv-002",
+    "title": "Empty conversation (no messages)",
+    "create_time": 1700001000.0,
+    "current_node": "node-root",
+    "mapping": {
+      "node-root": { "message": null, "parent": null }
+    }
+  },
+  {
+    "id": "conv-003",
+    "title": "Multi-turn with system message",
+    "create_time": 1700002000.0,
+    "current_node": "node-4",
+    "mapping": {
+      "node-root": { "message": null, "parent": null },
+      "node-1": {
+        "message": {
+          "id": "msg-1",
+          "author": { "role": "system" },
+          "content": { "parts": ["You are a helpful assistant."] },
+          "create_time": 1700002001.0
+        },
+        "parent": "node-root"
+      },
+      "node-2": {
+        "message": {
+          "id": "msg-2",
+          "author": { "role": "user" },
+          "content": { "parts": ["Tell me a joke."] },
+          "create_time": 1700002002.0
+        },
+        "parent": "node-1"
+      },
+      "node-3": {
+        "message": {
+          "id": "msg-3",
+          "author": { "role": "assistant" },
+          "content": { "parts": ["Why did the chicken cross the road?"] },
+          "create_time": 1700002003.0
+        },
+        "parent": "node-2"
+      },
+      "node-4": {
+        "message": {
+          "id": "msg-4",
+          "author": { "role": "user" },
+          "content": { "parts": ["To get to the other side!"] },
+          "create_time": 1700002004.0
+        },
+        "parent": "node-3"
+      }
+    }
+  }
+]
