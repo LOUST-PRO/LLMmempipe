@@ -8,6 +8,12 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  # actions/checkout@v4 ships on Node.js 20, which is being deprecated
+  # on the GH Actions runner (Node 24 default 2026-06-16, Node 20
+  # removed 2026-09-16). Opt into Node 24 early so the warning stops
+  # and we are future-proofed. See
+  # https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 # Read-only access is enough for CI. No secrets, no write tokens.
 permissions:
