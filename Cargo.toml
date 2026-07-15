@@ -1,13 +1,13 @@
 [package]
 name = "loust-llm-mempipe"
-version = "0.5.0"
+version = "0.6.0"
 edition = "2021"
 rust-version = "1.75"
 description = "Compile noisy LLM exports (ChatGPT, Claude, Gemini) into token-efficient JSONL + Markdown for Claude Code, Projects, and agent runtimes."
-license = "MIT OR Apache-2.0"
-repository = "https://github.com/LOUST-PRO/loust-llm-mempipe"
+license = "Apache-2.0"
+repository = "https://github.com/LOUST-PRO/LLMmempipe"
 readme = "README.md"
-keywords = ["llm", "memory", "chatgpt", "claude", "context", "jsonl", "claude-code", "mcp", "agents"]
+keywords = ["llm", "memory-export", "chatgpt", "jsonl", "claude-code"]
 categories = ["command-line-utilities", "text-processing", "development-tools::profiling"]
 authors = ["LOUST-PRO <opensource@loust.pro>"]
 exclude = [".github/", "target/", "*.log", "CHANGELOG.md.bak"]

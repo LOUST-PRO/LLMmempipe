@@ -6,6 +6,24 @@ All notable changes to loust-llm-mempipe are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.6.0] — 2026-07-15
+
+### Changed
+- **License: Apache-2.0 only** (was `MIT OR Apache-2.0` dual). Added a full
+  Apache-2.0 LICENSE file at the repo root.
+- **Repository URL unified**: all README links, CI badge, and Cargo.toml
+  `repository` field now point to `https://github.com/LOUST-PRO/LLMmempipe`
+  (was `https://github.com/LOUST-PRO/loust-llm-mempipe`, which 404'd).
+- **Scope clarification** added to README: explicit "this is a post-export
+  compiler, not a memory harness" callout so the crate is not confused with
+  agent-memory systems when surfaced on crates.io search.
+- Cargo.toml keyword `memory` replaced with `memory-export` to better
+  describe the export-compilation use case in crates.io search results.
+
+### Notes
+- No source-code semantic changes — F6 is a metadata/docs/license batch.
+- v0.6.0 republishes to crates.io replacing the v0.0.2 placeholder.
+
 ## [0.5.0] — 2026-06-11
 
 ### Added
