@@ -1,6 +1,6 @@
 [package]
 name = "loust-llm-mempipe"
-version = "0.6.0"
+version = "0.6.1"
 edition = "2021"
 rust-version = "1.75"
 description = "Compile noisy LLM exports (ChatGPT, Claude, Gemini) into token-efficient JSONL + Markdown for Claude Code, Projects, and agent runtimes."
@@ -39,13 +39,13 @@ regex = "1"
 anyhow = "1"
 thiserror = "1"
 
-# CLI (F4 will use these; declared now to lock dependencies)
+# CLI (locked now; the surface ships in v0.4.0)
 clap = { version = "4", features = ["derive", "env"] }
 
-# Async IO (for streaming large exports in F2/F3)
+# Async IO (for streaming large exports; introduced in v0.3.0)
 tokio = { version = "1", features = ["fs", "io-util", "rt-multi-thread", "macros"] }
 
-# Progress bars for large exports (used in F3)
+# Progress bars for large exports (introduced in v0.3.0)
 indicatif = "0.17"
 
 [dev-dependencies]
