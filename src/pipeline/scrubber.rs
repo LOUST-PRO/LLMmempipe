@@ -60,6 +60,10 @@ mod tests {
     use super::*;
     use crate::config::SecretKind;
     use crate::pipeline::Role;
+    use crate::test_fixtures::{
+        FAKE_ABSOLUTE_PATH, FAKE_ANTHROPIC_API_KEY, FAKE_AWS_ACCESS_KEY, FAKE_EMAIL,
+        FAKE_GITHUB_TOKEN, FAKE_PRIVATE_IP,
+    };
     use chrono::TimeZone;
 
     fn make_msg(content: &str) -> NormalizedMessage {
@@ -90,7 +94,7 @@ mod tests {
     #[test]
     fn redacts_aws_access_key() {
         let cfg = PipelineConfig::with_safe_defaults();
-        let mut msg = make_msg("key=AKIAIOSFODNN7EXAMPLE leaked");
+        let mut msg = make_msg(&format!("key={} leaked", FAKE_AWS_ACCESS_KEY));
         let report = scrub(&mut msg, &cfg);
         assert!(report.was_redacted());
         assert!(report.redacted_kinds.contains(&SecretKind::AwsAccessKey));
@@ -101,7 +105,7 @@ mod tests {
     #[test]
     fn redacts_anthropic_api_key() {
         let cfg = PipelineConfig::with_safe_defaults();
-        let mut msg = make_msg("auth: sk-ant-api03-abcdefghijklmnopqrstuvwxyz0123456789ABCD");
+        let mut msg = make_msg(&format!("auth: {}", FAKE_ANTHROPIC_API_KEY));
         let report = scrub(&mut msg, &cfg);
         assert!(report.redacted_kinds.contains(&SecretKind::AnthropicApiKey));
         assert!(msg.content.contains("[REDACTED:anthropic_key]"));
@@ -110,7 +114,7 @@ mod tests {
     #[test]
     fn redacts_github_token() {
         let cfg = PipelineConfig::with_safe_defaults();
-        let mut msg = make_msg("token: ghp_1234567890abcdefghijklmnopqrstuvwxyzAB");
+        let mut msg = make_msg(&format!("token: {}", FAKE_GITHUB_TOKEN));
         let report = scrub(&mut msg, &cfg);
         assert!(report.redacted_kinds.contains(&SecretKind::GitHubToken));
     }
@@ -118,16 +122,16 @@ mod tests {
     #[test]
     fn redacts_email_address() {
         let cfg = PipelineConfig::with_safe_defaults();
-        let mut msg = make_msg("ping davidmirelesll@outlook.com later");
+        let mut msg = make_msg(&format!("ping {} later", FAKE_EMAIL));
         let report = scrub(&mut msg, &cfg);
         assert!(report.redacted_kinds.contains(&SecretKind::EmailAddress));
-        assert!(!msg.content.contains("@outlook.com"));
+        assert!(!msg.content.contains("@b.com"));
     }
 
     #[test]
     fn redacts_private_ipv4() {
         let cfg = PipelineConfig::with_safe_defaults();
-        let mut msg = make_msg("server at 192.168.1.42 was down");
+        let mut msg = make_msg(&format!("server at {} was down", FAKE_PRIVATE_IP));
         let report = scrub(&mut msg, &cfg);
         assert!(report.redacted_kinds.contains(&SecretKind::PrivateIpv4));
         assert!(msg.content.contains("[REDACTED:private_ip]"));
@@ -136,7 +140,7 @@ mod tests {
     #[test]
     fn redacts_absolute_user_path() {
         let cfg = PipelineConfig::with_safe_defaults();
-        let mut msg = make_msg("see /home/lou/secret.txt for details");
+        let mut msg = make_msg(&format!("see {} for details", FAKE_ABSOLUTE_PATH));
         let report = scrub(&mut msg, &cfg);
         assert!(report
             .redacted_kinds
@@ -156,7 +160,7 @@ mod tests {
     #[test]
     fn redacts_multiple_kinds_in_one_message() {
         let cfg = PipelineConfig::with_safe_defaults();
-        let mut msg = make_msg("key AKIAIOSFODNN7EXAMPLE email a@b.com");
+        let mut msg = make_msg(&format!("key {} email {}", FAKE_AWS_ACCESS_KEY, FAKE_EMAIL));
         let report = scrub(&mut msg, &cfg);
         assert!(report.redacted_kinds.contains(&SecretKind::AwsAccessKey));
         assert!(report.redacted_kinds.contains(&SecretKind::EmailAddress));

@@ -8,6 +8,11 @@ pub mod adapter;
 pub mod config;
 pub mod pipeline;
 
+// Test-only fixtures. `#[doc(hidden)]` keeps this out of rustdoc;
+// `pub` is required so integration tests under `tests/` can import it.
+#[doc(hidden)]
+pub mod test_fixtures;
+
 pub use adapter::{Adapter, AdapterKind};
 pub use config::{OutputFormat, PipelineConfig, SecretKind};
 pub use pipeline::{NormalizedMessage, Pipeline, PipelineOutput, PipelineStats, Role};
@@ -95,25 +100,29 @@ mod tests {
 
     #[test]
     fn scrubber_patterns_match_realistic_secrets() {
+        use crate::test_fixtures::{
+            FAKE_ANTHROPIC_API_KEY, FAKE_AWS_ACCESS_KEY, FAKE_EMAIL, FAKE_GITHUB_TOKEN,
+        };
+
         let cfg = PipelineConfig::with_safe_defaults();
 
-        let sample = "key=AKIAIOSFODNN7EXAMPLE leaked";
+        let sample = format!("key={} leaked", FAKE_AWS_ACCESS_KEY);
         let aws_pat = cfg
             .secret_patterns
             .iter()
             .find(|(k, _)| k == &SecretKind::AwsAccessKey)
             .unwrap();
-        assert!(aws_pat.1.is_match(sample));
+        assert!(aws_pat.1.is_match(&sample));
 
-        let sample = "Authorization: sk-ant-api03-abcdefghijklmnopqrstuvwxyz0123456789ABCD";
+        let sample = format!("Authorization: {}", FAKE_ANTHROPIC_API_KEY);
         let ant_pat = cfg
             .secret_patterns
             .iter()
             .find(|(k, _)| k == &SecretKind::AnthropicApiKey)
             .unwrap();
-        assert!(ant_pat.1.is_match(sample));
+        assert!(ant_pat.1.is_match(&sample));
 
-        let sample = "ghp_1234567890abcdefghijklmnopqrstuvwxyzAB";
+        let sample = FAKE_GITHUB_TOKEN;
         let gh_pat = cfg
             .secret_patterns
             .iter()
@@ -121,12 +130,12 @@ mod tests {
             .unwrap();
         assert!(gh_pat.1.is_match(sample));
 
-        let sample = "reach me at davidmirelesll@outlook.com";
+        let sample = format!("reach me at {}", FAKE_EMAIL);
         let email_pat = cfg
             .secret_patterns
             .iter()
             .find(|(k, _)| k == &SecretKind::EmailAddress)
             .unwrap();
-        assert!(email_pat.1.is_match(sample));
+        assert!(email_pat.1.is_match(&sample));
     }
 }
