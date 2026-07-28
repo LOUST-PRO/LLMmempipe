@@ -7,6 +7,7 @@
 use chrono::{TimeZone, Utc};
 use loust_llm_mempipe::adapter::chatgpt::ChatGptAdapter;
 use loust_llm_mempipe::pipeline::{parser, Pipeline, PipelineOutput};
+use loust_llm_mempipe::test_fixtures::{FAKE_AWS_ACCESS_KEY, FAKE_EMAIL};
 use loust_llm_mempipe::PipelineConfig;
 
 fn fixture() -> &'static str {
@@ -112,8 +113,8 @@ fn pipeline_with_secrets_redacts_and_records_stats() {
         signal_score: 0.0,
     };
     let messages = vec![
-        mk("a", "my key AKIAIOSFODNN7EXAMPLE leaked"),
-        mk("b", "email me at a@b.com"),
+        mk("a", &format!("my key {} leaked", FAKE_AWS_ACCESS_KEY)),
+        mk("b", &format!("email me at {}", FAKE_EMAIL)),
         mk("c", "no secrets here"),
     ];
 
