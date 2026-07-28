@@ -6,6 +6,27 @@ All notable changes to loust-llm-mempipe are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.6.2] — 2026-07-28
+
+### Changed
+- **test fixtures**: consolidated 6 fake-key/fake-PII test fixtures into
+  `src/test_fixtures.rs` so the scrubber test suite has a single source
+  of truth. Previously the same placeholder strings lived in 3 files
+  (`src/lib.rs`, `src/pipeline/scrubber.rs`, `tests/pipeline_e2e.rs`).
+- **scrubber**: added `tests/scrubber_fixtures_meta.rs` meta-test
+  verifying the scrubber recognizes every fixture as a redactable
+  pattern and that each fixture's regex still matches its declared
+  literal (regression guard against future pattern or fixture drift).
+
+### Notes
+- No semantic changes to the scrubber behavior or public API.
+- Yanks v0.6.1: that version contained the inline fake-key fixture
+  that triggered a false-positive KeyScout security alert (issue #1).
+  The strings themselves are placeholders (alphabet+digits, not real
+  keys), but consolidating them is a quality improvement.
+- See `src/test_fixtures.rs` module doc for the rationale on why
+  these fixtures are constructed the way they are.
+
 ## [0.6.1] — 2026-07-15
 
 ### Changed
